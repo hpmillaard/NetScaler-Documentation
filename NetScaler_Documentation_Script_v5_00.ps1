@@ -8496,9 +8496,11 @@ If ($FEATSSLVPN -eq "Enabled"){
 				
 				# Basic Settings
 				@{ Description = "Protocol"; Value = $vpn.servicetype }
-				If ($vpn.ipv46 -eq 0.0.0.0){
-					@{ Description = "IP Address"; Value = $vpn.ipv46 }
-					@{ Description = "Port"; Value = $vpn.port }
+				If ($vpn.port -eq "0"){
+					@{ Description = "IP Address Type"; Value = "Non Addressable"}
+				}Else{
+					@{ Description = "IP"; Value = $vpn.ipv46}
+					@{ Description = "Port"; Value = $vpn.port}
 				}
 				If ($vpn.servicetype -eq "SSL"){
 					If (![string]::IsNullOrWhiteSpace($vpn.rdpserverprofilename)){@{ Description = "RDP Server Profile"; Value = $vpn.rdpserverprofilename }}
