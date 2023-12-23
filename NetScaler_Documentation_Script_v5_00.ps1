@@ -647,6 +647,9 @@ Param(
     [string]$Folder = "",
 	
     [parameter(Mandatory = $False)]
+	[Alias("RN")]
+	[Alias("Report")]
+	[Alias("ReportName")]
     [string]$ReportFileName = "NetScaler Documentation",
 
     [parameter(ParameterSetName = "Word", Mandatory = $False)] 
@@ -7153,7 +7156,7 @@ If ($FEATLB -eq "Enabled"){
 		If ($monitor.Type -eq "HTTP" -and $Monitor.monitorname -ne "http" -and $Monitor.monitorname -ne "https"){
 			WriteWordLine 4 0 "$($Monitor.monitorname)"
 			[System.Collections.Hashtable[]] $MONITORSHTTPH = @(
-				If (![string]::IsNullOrWhiteSpace($monitor.respcode)){@{ Description = "Response Code"; Value = $monitor.respcode}}
+				If (![string]::IsNullOrWhiteSpace($monitor.respcode)){@{ Description = "Response Code"; Value = $monitor.respcode -join ", "}}
 				If (![string]::IsNullOrWhiteSpace($monitor.customheaders)){@{ Description = "Custom Header"; Value = $monitor.customheaders -replace "\r\n","\r\n"}}
 				If (![string]::IsNullOrWhiteSpace($monitor.httprequest)){@{ Description = "HTTP Request"; Value = $monitor.httprequest}}
 				@{ Description = "Secure"; Value = $monitor.secure}
